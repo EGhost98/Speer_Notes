@@ -19,6 +19,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             },
             required=['username', 'password'],
         ),
+        operation_summary="Get Access and Refresh Tokens",
         responses={
             200: 'Successfully retrieved access and refresh tokens',
             401: 'Invalid credentials',
@@ -36,6 +37,7 @@ class CustomTokenRefreshView(TokenRefreshView):
             },
             required=['refresh'],
         ),
+        operation_summary="Refresh Access Token",
         responses={
             200: 'Successfully retrieved a new access token',
             401: 'Invalid refresh token',
@@ -58,6 +60,7 @@ class LogoutView(APIView):
             },
             required=['refresh_token'],
         ),
+        operation_summary="User Logout",
         responses={
             200: 'Successfully logged out',
             401: 'Invalid refresh token',
@@ -80,6 +83,7 @@ class RegisterView(APIView):
             },
             required=['username', 'email', 'password'],
         ),
+        operation_summary="User Registration",
         responses={
             201: 'User created successfully',
             400: 'Bad Request: Invalid input data',
