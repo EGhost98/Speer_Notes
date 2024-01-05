@@ -9,10 +9,13 @@ from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import F
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from rest_framework.throttling import UserRateThrottle
+from rest_framework.throttling import AnonRateThrottle
 
 class NoteViewSet(ViewSet):
     permission_classes = [IsAuthenticated]
-
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    
     @swagger_auto_schema(
         manual_parameters=[
             openapi.Parameter('Authorization', openapi.IN_HEADER, description='Authorization header with Bearer token', type=openapi.TYPE_STRING, format=openapi.FORMAT_SLUG, default='Bearer <your_token_here>'),
@@ -145,6 +148,7 @@ class NoteViewSet(ViewSet):
 
 class ShareViewSet(ViewSet):
     permission_classes = [IsAuthenticated]
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
     
     @swagger_auto_schema(
         manual_parameters=[
@@ -182,7 +186,8 @@ class ShareViewSet(ViewSet):
 
 class UnShareViewSet(ViewSet):
     permission_classes = [IsAuthenticated]
-
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    
     @swagger_auto_schema(
         manual_parameters=[
             openapi.Parameter('Authorization', openapi.IN_HEADER, description='Authorization header with Bearer token', type=openapi.TYPE_STRING, format=openapi.FORMAT_SLUG, default='Bearer <your_token_here>'),
@@ -219,7 +224,8 @@ class UnShareViewSet(ViewSet):
         
 class MakePublicViewSet(ViewSet):
     permission_classes = [IsAuthenticated]
-
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    
     @swagger_auto_schema(
         manual_parameters=[
             openapi.Parameter('Authorization', openapi.IN_HEADER, description='Authorization header with Bearer token', type=openapi.TYPE_STRING, format=openapi.FORMAT_SLUG, default='Bearer <your_token_here>'),
@@ -245,7 +251,8 @@ class MakePublicViewSet(ViewSet):
         
 class MakePrivateViewSet(ViewSet):
     permission_classes = [IsAuthenticated]
-
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    
     @swagger_auto_schema(
         manual_parameters=[
             openapi.Parameter('Authorization', openapi.IN_HEADER, description='Authorization header with Bearer token', type=openapi.TYPE_STRING, format=openapi.FORMAT_SLUG, default='Bearer <your_token_here>'),
@@ -271,7 +278,8 @@ class MakePrivateViewSet(ViewSet):
 
 class SearchViewSet(ViewSet):
     permission_classes = [IsAuthenticated]
-
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    
     @swagger_auto_schema(
         manual_parameters=[
             openapi.Parameter('Authorization', openapi.IN_HEADER, description='Authorization header with Bearer token', type=openapi.TYPE_STRING, format=openapi.FORMAT_SLUG, default='Bearer <your_token_here>'),

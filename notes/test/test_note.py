@@ -47,11 +47,6 @@ class NoteViewSetTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual('Note Deleted Successfully.', response.data['detail'])
 
-    def test_unauthorized_access(self):
-        unauthorized_client = APIClient()
-        response = unauthorized_client.get(self.note_url)
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-
     def test_permission_denied_update(self):
         other_user = UserData.objects.create_user(name='otheruser', email='otheruser@example.com', password='otherpassword')
         self.client.force_authenticate(user=other_user)

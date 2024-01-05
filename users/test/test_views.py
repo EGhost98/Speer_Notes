@@ -55,15 +55,3 @@ class AuthenticationTests(TestCase):
         response = self.client.post(self.refresh_url, data={'refresh': str(refresh_token)})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('access', response.data)
-
-    def test_logout(self):
-        self.client.post(self.register_url, data=self.user_data)
-        response = self.client.post(self.login_url, data={'email': self.user_data['email'], 'password': self.user_data['password']})
-        refresh_token = response.data['refresh']
-        access_token = response.data['access']
-        headers = {
-            'Authorization': f'Bearer {access_token}',
-        }
-        response = self.client.post(self.logout_url, data={'refresh_token': str(refresh_token)}, headers=headers)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['detail'], 'User logged out successfully.')

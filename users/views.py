@@ -53,9 +53,9 @@ class CustomTokenRefreshView(TokenRefreshView):
         return super().post(request, *args, **kwargs)
 
 class LogoutView(APIView):
-    throttle_classes = [UserRateThrottle, AnonRateThrottle]
     permission_classes = (IsAuthenticated,)
-
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    
     @swagger_auto_schema(
         manual_parameters=[
             openapi.Parameter('Authorization', openapi.IN_HEADER, description='Authorization header with Bearer token', type=openapi.TYPE_STRING, format=openapi.FORMAT_SLUG, default='Bearer <your_token_here>'),
