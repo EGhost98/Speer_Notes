@@ -18,7 +18,6 @@ class AuthenticationTests(TestCase):
             'email': 'testuser@gmail.com',
             'password': 'testpassword',
         }
-        # self.user = User.objects.create_user(**self.user_data)
 
     def test_registration(self):
         response = self.client.post(self.register_url, data=self.user_data)

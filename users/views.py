@@ -8,8 +8,12 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from rest_framework.throttling import UserRateThrottle
+from rest_framework.throttling import AnonRateThrottle
 
 class CustomTokenObtainPairView(TokenObtainPairView):
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    
     @swagger_auto_schema(
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
@@ -29,6 +33,8 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         return super().post(request, *args, **kwargs)
 
 class CustomTokenRefreshView(TokenRefreshView):
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    
     @swagger_auto_schema(
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
@@ -47,6 +53,7 @@ class CustomTokenRefreshView(TokenRefreshView):
         return super().post(request, *args, **kwargs)
 
 class LogoutView(APIView):
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
     permission_classes = (IsAuthenticated,)
 
     @swagger_auto_schema(
@@ -73,11 +80,13 @@ class LogoutView(APIView):
         return Response({'detail': 'User logged out successfully.'}, status=status.HTTP_200_OK)
 
 class RegisterView(APIView):
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    
     @swagger_auto_schema(
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'username': openapi.Schema(type=openapi.TYPE_STRING, description='Your username'),
+                'name': openapi.Schema(type=openapi.TYPE_STRING, description='Your username'),
                 'email': openapi.Schema(type=openapi.TYPE_STRING, description='Your email'),
                 'password': openapi.Schema(type=openapi.TYPE_STRING, description='Your password'),
             },

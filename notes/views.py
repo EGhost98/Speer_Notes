@@ -25,7 +25,7 @@ class NoteViewSet(ViewSet):
     def list(self, request):
         queryset = Note.objects.filter(user=request.user)
         serializer = NoteSerializer(queryset, many=True)
-        return Response({'detail' : 'Notes Fetched Succesfully', 'Notes' : serializer.data }, status=status.HTTP_200_OK)
+        return Response({'detail' : 'Notes Fetched Successfully', 'Notes' : serializer.data }, status=status.HTTP_200_OK)
     
     @swagger_auto_schema(
         manual_parameters=[
@@ -55,7 +55,7 @@ class NoteViewSet(ViewSet):
         serializer = NoteSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'detail' : 'Note Created Succesfully', 'Note' : serializer.data }, status=status.HTTP_201_CREATED)
+            return Response({'detail' : 'Note Created Successfully', 'Note' : serializer.data }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     @swagger_auto_schema(
@@ -113,7 +113,7 @@ class NoteViewSet(ViewSet):
                 serializer = NoteSerializer(instance, data=data, partial=True)
                 if serializer.is_valid():
                     serializer.save()
-                    return Response({'detail' : 'Note Updated Succesfully', 'Note' : serializer.data }, status=status.HTTP_200_OK)
+                    return Response({'detail' : 'Note Updated Successfully', 'Note' : serializer.data }, status=status.HTTP_200_OK)
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             else:
                 return Response({"detail": "You do not have permission to update this note."}, status=status.HTTP_403_FORBIDDEN)
@@ -126,7 +126,7 @@ class NoteViewSet(ViewSet):
         ],
         operation_summary="Delete a note.",
         responses={
-            status.HTTP_204_NO_CONTENT: "Note deleted successfully.",
+            status.HTTP_200_OK: "Note deleted successfully.",
             status.HTTP_403_FORBIDDEN: "You do not have permission to delete this note.",
             status.HTTP_404_NOT_FOUND: "Note not found.",
         }
@@ -135,9 +135,9 @@ class NoteViewSet(ViewSet):
         user = request.user
         try:
             instance = Note.objects.get(pk=pk)
-            if instance.user == request.user:
+            if instance.user == user:
                 instance.delete()
-                return Response({"detail": "Note Deleted Succesully."}, status=status.HTTP_204_NO_CONTENT)
+                return Response({"detail": "Note Deleted Successfully."}, status=status.HTTP_200_OK)
             else:
                 return Response({"detail": "You do not have permission to delete this note."}, status=status.HTTP_403_FORBIDDEN)
         except Note.DoesNotExist:
@@ -289,10 +289,9 @@ class SearchViewSet(ViewSet):
         search_query = request.query_params.get('q', '')
         if not search_query:
             return Response({"detail": "Invalid search query."}, status=status.HTTP_400_BAD_REQUEST)
-
         queryset = Note.objects.filter(
             user=request.user,
-            search_vector=SearchVector('your_searchable_field_name')  # Replace with the actual field name
+            search_vector=SearchQuery(search_query)
         ).annotate(
             rank=SearchRank(F('search_vector'), SearchQuery(search_query))
         ).order_by('-rank')
