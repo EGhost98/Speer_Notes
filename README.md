@@ -1,8 +1,14 @@
 # Speer Notes
 
+## Table of Contents 
+
+- [How to run the API Project](#how-to-run-the-api-project)
+- [How to run the Tests](#how-to-run-the-tests)
+- [Reason for choice of Tech Stack](#reason-for-choice-of-tech-stack)
+- [API Documentation](#api-documentation)
+
 ![image](https://github.com/EGhost98/Speer_Notes/assets/76267623/cedacbda-942b-4c52-b530-ddc35e2b7c8b)
 
-[API Documentation](#api-documentation)
 
 ## How to Run the API Project
 To run the project, follow these steps:
@@ -51,13 +57,18 @@ PostgreSQL, as the chosen database management system, offers ACID compliance, su
 
 ### Why Python Standard Unittest Library?
 
-The Python standard `unittest` library serves as the primary testing framework for this project. Its simplicity and extensibility make it well-suited for crafting unit tests tailored to the project's Django applications. By leveraging the standard `unittest` library, the project ensures compatibility and maintainability of the test suite, supporting robust and reliable testing for all API endpoints.
+The Python standard `unittest` library serves as the primary testing framework for this project. Its simplicity and extensibility make it well-suited for crafting unit tests tailored to the project's Django applications.
 
 ### Additional Testing with Postman
 
 Postman was employed for API testing during the development process. This tool provides a user-friendly interface for testing API endpoints, allowing for comprehensive validation of the API's functionality, data handling, and error responses.
 
 # API Documentation
+
+## Swagger UI
+
+- **URL:** `/swagger/`
+- **Description:** Interactive API documentation using Swagger UI.
 
 ## Authentication Endpoints
 
@@ -146,8 +157,3 @@ Postman was employed for API testing during the development process. This tool p
 - **URL:** `/api/search?q=:query`
 - **Method:** `GET`
 - **Description:** Search for notes based on keywords for the authenticated user.
-
-## Swagger UI
-
-- **URL:** `/swagger/`
-- **Description:** Interactive API documentation using Swagger UI.
