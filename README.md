@@ -2,13 +2,15 @@
 
 ![image](https://github.com/EGhost98/Speer_Notes/assets/76267623/cedacbda-942b-4c52-b530-ddc35e2b7c8b)
 
+[API Documentation](#api-documentation)
+
 ## How to Run the API Project
 To run the project, follow these steps:
 
 1. Clone the repository: `git clone <repository_url>`
 2. Create a Virtual Python Environment `python -m venv env`.
 3. Activate the Virtual Environment (if using Git-Bash) `source env/Scripts/Activate`
-4. Navigate to the project directory: `cd Speer-Notes`
+4. Navigate to the project directory: `cd Speer_Notes`
 5. Install the dependencies: `pip install -r requirements.txt`
 6. Change Database Parameters in .env as required. (local or Your Own Database or use the provided vercel Postgres Database).
 7. Run the migrate command `python manage.py migrate`. (If Using your own Postgres Database)
@@ -33,23 +35,27 @@ To run the project, follow these steps:
 
 ### Why Python?
 
-Python is a versatile and powerful programming language known for its readability, simplicity, and a vast ecosystem of libraries.
+Python was chosen for this project due to its versatility, readability, and extensive library support. In the context of this project, Python's simplicity facilitates rapid development and ensures maintainability.
 
 ### Why Django?
 
-Django is a high-level web framework for Python that encourages rapid development, clean and pragmatic design, and follows the "Don't Repeat Yourself" (DRY) principle. It provides a robust set of tools for building web applications, including an ORM for database interactions, a templating engine, and a built-in admin interface.
+Django, being a high-level web framework for Python, is an ideal choice for this project. Its rapid development capabilities, clean design principles, and built-in tools like the ORM (Object-Relational Mapping) for database interactions perfectly suit the requirements of creating a secure and scalable RESTful API.
 
 ### Why Django Rest Framework (DRF)?
 
-Django Rest Framework (DRF) is a powerful and flexible toolkit for building Web APIs in Django. It extends Django's capabilities to handle common patterns in API design, making it easy to build RESTful APIs. DRF provides features like serialization, authentication, and viewsets, simplifying the process of developing robust APIs.
+Django Rest Framework (DRF) is an essential component for building Web APIs within the Django framework. It streamlines the process of developing RESTful APIs by providing serialization, authentication, and viewsets. Its integration with Django makes it a powerful choice for handling API design patterns, ensuring efficiency in developing robust API endpoints for this project.
 
 ### Why PostgreSQL?
 
-PostgreSQL is a robust, open-source relational database management system. It is ACID compliant, supports complex queries, and has excellent performance. For efficient searching, we utilize indexing in PostgreSQL. Indexing enhances the speed of search operations by creating a data structure (index) on one or more columns, significantly reducing the time required to retrieve results.
+PostgreSQL, as the chosen database management system, offers ACID compliance, support for complex queries, and excellent performance. In the context of this project, the decision to utilize indexing in PostgreSQL enhances search efficiency. Indexing involves creating data structures on specific columns, significantly reducing the time needed to retrieve search results—a crucial factor in the project's note-search functionality.
 
 ### Why Python Standard Unittest Library?
 
-Python's standard `unittest` library provides a simple and extensible testing framework. It allows for the creation of test cases and test suites, making it easy to write unit tests for Django applications. By using the standard `unittest` library, we ensure compatibility and maintainability of our test suite.
+The Python standard `unittest` library serves as the primary testing framework for this project. Its simplicity and extensibility make it well-suited for crafting unit tests tailored to the project's Django applications. By leveraging the standard `unittest` library, the project ensures compatibility and maintainability of the test suite, supporting robust and reliable testing for all API endpoints.
+
+### Additional Testing with Postman
+
+Postman was employed for API testing during the development process. This tool provides a user-friendly interface for testing API endpoints, allowing for comprehensive validation of the API's functionality, data handling, and error responses.
 
 # API Documentation
 
