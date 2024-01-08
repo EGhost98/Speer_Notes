@@ -115,13 +115,13 @@ Python's standard `unittest` library provides a simple and extensible testing fr
 
 - **URL:** `/api/notes/:id/share/`
 - **Method:** `POST`
-- **Description:** Share a note with another user for the authenticated user.
+- **Description:** Share a note with another user using their email for the authenticated user.
 
 ### 7. Unshare Note with Another User
 
 - **URL:** `/api/notes/:id/unshare/`
 - **Method:** `POST`
-- **Description:** Unshare a note with another user for the authenticated user.
+- **Description:** Unshare a note with another user using their email for the authenticated user.
 
 ### 8. Make Note Public
 
@@ -133,7 +133,7 @@ Python's standard `unittest` library provides a simple and extensible testing fr
 
 - **URL:** `/api/notes/:id/make-private/`
 - **Method:** `POST`
-- **Description:** Make a note private for the authenticated user.
+- **Description:** Make a note private(except for users in shared list) for the authenticated user.
 
 ### 10. Search Notes
 
