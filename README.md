@@ -6,6 +6,8 @@
 - [How to run the Tests](#how-to-run-the-tests)
 - [Reason for choice of Tech Stack](#reason-for-choice-of-tech-stack)
 - [API Documentation](#api-documentation)
+- [Search Functionality](#search-functionality)
+- [Rate Limiting](#rate-limiting)
 
 ![image](https://github.com/EGhost98/Speer_Notes/assets/76267623/cedacbda-942b-4c52-b530-ddc35e2b7c8b)
 
@@ -157,3 +159,62 @@ Postman was employed for API testing during the development process. This tool p
 - **URL:** `/api/search?q=:query`
 - **Method:** `GET`
 - **Description:** Search for notes based on keywords for the authenticated user.
+
+## Search Functionality
+
+This project includes a robust search functionality that enables users to search for notes based on keywords. The search feature enhances user experience by providing a quick and efficient way to locate relevant information.
+
+### Implementation
+
+The search functionality is implemented using Django's built-in `SearchVector` and `SearchVectorField` along with PostgreSQL's `GinIndex` for efficient full-text searching.
+
+#### Model Configuration
+
+```python
+# notes/models.py
+
+from django.contrib.postgres.search import SearchVectorField, SearchVector
+from django.contrib.postgres.indexes import GinIndex
+
+class Note(models.Model):
+    # ... other fields ...
+    search_vector = SearchVectorField(null=True, blank=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['user']),
+            GinIndex(fields=['search_vector']),
+        ]
+```
+
+## Rate Limiting
+
+This project implements rate limiting to control the number of requests made to the API within a specified time period. Rate limiting is employed to prevent abuse, ensure fair usage, and maintain system stability.
+
+### Overview
+
+The rate limiting strategy involves restricting the number of requests a user can make to the API within a defined timeframe. This is achieved using Django Rest Framework's built-in `throttle_classes` and `DEFAULT_THROTTLE_RATES` settings.
+
+### Rate Limiting Configuration
+
+The following rate limits are applied:
+
+- **Anon Rate Limit:** Specifies the maximum number of requests anonymous users can make per minute.
+- **User Rate Limit:** Limits the number of requests authenticated users can make per minute.
+
+### Configuration Example
+
+```python
+# settings.py
+
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '8/minute',
+        'user': '20/minute',
+    },
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle',
+    ],
+}
+```
