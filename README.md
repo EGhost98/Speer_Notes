@@ -9,6 +9,7 @@
 - [Search Functionality](#search-functionality)
 - [Rate Limiting](#rate-limiting)
 
+
 ![image](https://github.com/EGhost98/Speer_Notes/assets/76267623/cedacbda-942b-4c52-b530-ddc35e2b7c8b)
 
 
